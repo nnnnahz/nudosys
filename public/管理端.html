@@ -56,7 +56,7 @@
       orders.forEach(order => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td>${order.user}</td>
+          <td>${order.name}</td>
           <td>${order.item}</td>
           <td>${new Date(order.time).toLocaleString()}</td>
         `;
