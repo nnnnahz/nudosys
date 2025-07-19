@@ -96,7 +96,7 @@
     time: new Date().toISOString()
   };
 
-  fetch('http://localhost:3000/order', {
+  fetch('/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order)
@@ -111,6 +111,7 @@
   })
   .catch(() => alert('無法連接伺服器'));
 }
+
 
   </script>
 </body>
