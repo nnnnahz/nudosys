@@ -91,7 +91,7 @@
     function submitOrder() {
       const item = document.getElementById("noodle").value;
       const order = {
-        user: currentUser,
+        name: currentUser,
         item: item,
         time: new Date().toISOString()
       };
