@@ -25,6 +25,7 @@
         <tr>
           <th>名字</th>
           <th>訂購內容</th>
+          <th>時間</th>
         </tr>
       </thead>
       <tbody>
@@ -47,24 +48,23 @@
     }
 
     function loadOrders() {
-  fetch('http://localhost:3000/orders')
-    .then(res => res.json())
-    .then(orders => {
-      const tableBody = document.querySelector('#orderTable tbody');
-      tableBody.innerHTML = '';
-      orders.forEach(order => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${order.user}</td>
-          <td>${order.item}</td>
-          <td>${new Date(order.time).toLocaleString()}</td>
-        `;
-        tableBody.appendChild(row);
-      });
-    })
-    .catch(() => alert('無法取得訂單資料'));
-}
-
+      fetch('https://nudosys.onrender.com/orders')
+      .then(res => res.json())
+      .then(orders => {
+        const tableBody = document.querySelector('#orderTable tbody');
+        tableBody.innerHTML = '';
+        orders.forEach(order => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${order.user}</td>
+            <td>${order.item}</td>
+            <td>${new Date(order.time).toLocaleString()}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(() => alert('無法取得訂單資料'));
+    }
   </script>
 </body>
 </html>
