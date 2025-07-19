@@ -89,30 +89,28 @@
     }
 
     function submitOrder() {
-  const item = document.getElementById("noodle").value;
-  const order = {
-    user: currentUser,
-    item: item,
-    time: new Date().toISOString()
-  };
+      const item = document.getElementById("noodle").value;
+      const order = {
+        user: currentUser,
+        item: item,
+        time: new Date().toISOString()
+      };
 
-  fetch('/order', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(order)
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert('訂單送出成功！');
-    } else {
-      alert('訂單送出失敗');
+      fetch('https://nudosys.onrender.com/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(order)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          alert('訂單送出成功！');
+        } else {
+          alert('訂單送出失敗');
+        }
+      })
+      .catch(() => alert('無法連接伺服器'));
     }
-  })
-  .catch(() => alert('無法連接伺服器'));
-}
-
-
   </script>
 </body>
 </html>
