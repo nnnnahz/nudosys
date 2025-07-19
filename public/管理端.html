@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>泡麵訂單管理</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #fdf6e3; }
+    h2 { margin-top: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+    th { background: #eee; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1>泡麵訂單管理端</h1>
+  <p>請輸入管理密碼：</p>
+  <input type="password" id="adminPwd" placeholder="管理密碼">
+  <button onclick="verifyAdmin()">登入</button>
+
+  <div id="adminPanel" class="hidden">
+    <h2>所有訂單紀錄</h2>
+    <table id="orderTable">
+      <thead>
+        <tr>
+          <th>名字</th>
+          <th>訂購內容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 訂單會顯示在這裡 -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "admin123"; // 可以自行更改
+
+    function verifyAdmin() {
+      const pwd = document.getElementById('adminPwd').value;
+      if (pwd === ADMIN_PASSWORD) {
+        document.getElementById('adminPanel').classList.remove('hidden');
+        loadOrders();
+      } else {
+        alert('密碼錯誤');
+      }
+    }
+
+    function loadOrders() {
+  fetch('http://localhost:3000/orders')
+    .then(res => res.json())
+    .then(orders => {
+      const tableBody = document.querySelector('#orderTable tbody');
+      tableBody.innerHTML = '';
+      orders.forEach(order => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${order.user}</td>
+          <td>${order.item}</td>
+          <td>${new Date(order.time).toLocaleString()}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    })
+    .catch(() => alert('無法取得訂單資料'));
+}
+
+  </script>
+</body>
+</html>

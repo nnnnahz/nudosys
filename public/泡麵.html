@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>泡麵訂購系統</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      padding: 2rem;
+    }
+    .card {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label, select, input {
+      display: block;
+      width: 100%;
+      margin: 1rem 0 0.5rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>泡麵訂購系統</h2>
+
+    <div id="login">
+      <label for="name">選擇姓名：</label>
+      <select id="name">
+        <option value="詹越至">詹越至</option>
+        <option value="吳柏樺">吳柏樺</option>
+        <option value="周容">周容</option>
+      </select>
+
+      <label for="password">密碼：</label>
+      <input type="password" id="password" />
+
+      <button onclick="login()">登入</button>
+    </div>
+
+    <div id="orderForm" class="hidden">
+      <label for="noodle">選擇泡麵：</label>
+      <select id="noodle">
+        <option>維力炸醬麵</option>
+        <option>合味道</option>
+        <option>花雕雞</option>
+      </select>
+      <button onclick="submitOrder()">送出訂單</button>
+    </div>
+
+    <div id="status"></div>
+  </div>
+
+  <script>
+    const users = {
+      "詹越至": "0210",
+      "吳柏樺": "uber",
+      "周容": "0402"
+    };
+
+    let currentUser = null;
+
+    function login() {
+      const name = document.getElementById("name").value;
+      const pwd = document.getElementById("password").value;
+      if (users[name] === pwd) {
+        currentUser = name;
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("orderForm").classList.remove("hidden");
+        document.getElementById("status").innerText = `歡迎，${name}`;
+      } else {
+        alert("密碼錯誤");
+      }
+    }
+
+    function submitOrder() {
+  const item = document.getElementById("noodle").value;
+  const order = {
+    user: currentUser,
+    item: item,
+    time: new Date().toISOString()
+  };
+
+  fetch('http://localhost:3000/order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert('訂單送出成功！');
+    } else {
+      alert('訂單送出失敗');
+    }
+  })
+  .catch(() => alert('無法連接伺服器'));
+}
+
+  </script>
+</body>
+</html>
