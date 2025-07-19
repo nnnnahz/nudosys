@@ -13,7 +13,7 @@ app.use(express.static('public'));
 
 // Supabase 初始化（填入你的 Supabase 網址和密鑰）
 const supabaseUrl = 'https://puldiaqtuypozwrqatex.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1bGRpYXF0dXlwb3p3cnFhdGV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI5MTExNDUsImV4cCI6MjA2ODQ4NzE0NX0.MtvpjEStFWLvfuVMlQpt1dT7_PA0VbP2HqGkJROu_ek';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1bGRpYXF0dXlwb3p3cnFhdGV4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MjkxMTE0NSwiZXhwIjoyMDY4NDg3MTQ1fQ.tsItweZI0Hj5k4F-k75aFuIQ9ccUQEXcVw6F95O6oJM';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // POST /order - 新增訂單
