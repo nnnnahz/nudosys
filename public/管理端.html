@@ -48,7 +48,7 @@
     }
 
     function loadOrders() {
-  fetch('https://nudosys.onrender.com/nudosys')
+  fetch('https://nudosys.onrender.com/orders')
     .then(res => res.json())
     .then(orders => {
       const tableBody = document.querySelector('#orderTable tbody');
