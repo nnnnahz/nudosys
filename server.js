@@ -21,7 +21,7 @@ app.post('/order', async (req, res) => {
   const { name, item, time } = req.body;
   const { data, error } = await supabase
     .from('nudosys')   // 改成你資料表名稱
-    .insert([{ name, item, time }]);
+    .insert([{ name, item, time, brand }]);
 
   if (error) {
     console.error('Supabase insert error:', error);
