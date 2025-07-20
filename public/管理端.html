@@ -56,10 +56,11 @@
       orders.forEach(order => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td>${order.name}</td>
-          <td>${order.item}</td>
-          <td>${new Date(order.time).toLocaleString()}</td>
-        `;
+  <td>${order.name}</td>
+  <td>${order.brand} - ${order.flavor}</td>
+  <td>${new Date(order.time).toLocaleString()}</td>
+`;
+
         tableBody.appendChild(row);
       });
     })
