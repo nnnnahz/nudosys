@@ -52,3 +52,17 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
   res.send('Hello from server!');
 });
+
+
+app.patch('/done/:id', async (req, res) => {
+  const { id } = req.params;
+  const { data, error } = await supabase
+    .from('nudosys')
+    .update({ done: true })
+    .eq('id', id);
+
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+  res.json({ message: '已完成訂單' });
+});
