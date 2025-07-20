@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>泡麵訂購系統</title>
+  <title>黑狗宅急便</title>
   <style>
     body {
       font-family: sans-serif;
@@ -37,14 +37,24 @@
 </head>
 <body>
   <div class="card">
-    <h2>泡麵訂購系統</h2>
+    <h2>黑狗宅急便</h2>
 
     <div id="login">
-      <label for="name">選擇姓名：</label>
+      <label for="name">你是誰?：</label>
       <select id="name">
         <option value="詹越至">詹越至</option>
         <option value="吳柏樺">吳柏樺</option>
         <option value="周容">周容</option>
+        <option value="李寬灝">李寬灝</option>
+        <option value="卓承鋒">卓承鋒</option>
+        <option value="景博翰">景柏翰</option>
+        <option value="王宇釩">王宇釩</option>
+        <option value="王宥人">王宥人</option>
+        <option value="蔡也">蔡也</option>
+        <option value="王宥鈞">王宥鈞</option>
+        <option value="許瑀宸">許瑀宸</option>
+        <option value="陳律妤">陳律妤</option>
+        <option value="陳逸穎">陳逸穎</option>
       </select>
 
       <label for="password">密碼：</label>
@@ -54,7 +64,7 @@
     </div>
 
     <div id="orderForm" class="hidden">
-      <label for="noodle">選擇泡麵：</label>
+      <label for="noodle">想要吃甚麼?：</label>
       <select id="noodle">
         <option>維力炸醬麵</option>
         <option>合味道</option>
@@ -70,7 +80,15 @@
     const users = {
       "詹越至": "0210",
       "吳柏樺": "uber",
-      "周容": "0402"
+      "周容": "0402",
+      "李寬灝": "0123",
+      "王宇釩": "evan",
+      "王宥人": "0904",
+      "王宥鈞": "randy",
+      "蔡也": "0227",
+      "許瑀宸": "0810",
+      "陳逸穎": "0102",
+      "陳律妤": "allison",
     };
 
     let currentUser = null;
