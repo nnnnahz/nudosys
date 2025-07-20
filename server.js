@@ -104,3 +104,21 @@ function loadUserOrders() {
     })
     .catch(() => alert('無法取得歷史訂單'));
 }
+
+
+app.delete('/order/:id', async (req, res) => {
+  const { id } = req.params;
+  console.log("收到刪除請求，ID =", id);
+
+  const { error } = await supabase
+    .from('nudosys')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error('刪除失敗', error);
+    return res.status(500).send({ success: false, error: error.message });
+  }
+
+  res.send({ success: true, message: `已刪除 ID 為 ${id} 的訂單` });
+});
