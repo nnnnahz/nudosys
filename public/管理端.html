@@ -55,7 +55,7 @@
       const tableBody = document.querySelector('#orderTable tbody');
       tableBody.innerHTML = '';
       orders.forEach(order => {
-        const doneText = order.done ? '✅ 已完成' : `<button onclick="markAsDone('${order.id}')">完成</button>`;
+        const doneText = order.done ? ' 已完成' : `<button onclick="markAsDone('${order.id}')">完成</button>`;
         const row = document.createElement('tr');
         row.innerHTML = `
           <td>${order.name}</td>
