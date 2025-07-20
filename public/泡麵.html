@@ -46,6 +46,10 @@
       opacity: 0.2;
       z-index: -9;
     }
+    .submit-btn {
+    margin-bottom: 1rem; 
+    }
+
   </style>
 </head>
 <body>
@@ -106,7 +110,7 @@
 
       <button onclick="submitOrder()">送出訂單</button>
 
-      <button onclick="loadUserOrders()">查看歷史訂單</button>
+      <button onclick="loadUserOrders()" class="submit-btn">查看歷史訂單</button>
 
     <div id="historyOrders" style="margin-top:20px; display:none;">
       <h3>你的歷史訂單</h3>
