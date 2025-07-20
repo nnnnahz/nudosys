@@ -30,10 +30,10 @@ app.post('/order', async (req, res) => {
   res.json({ success: true });
 });
 
-// GET /orders - 取得所有訂單
+//  /orders - 取得所有訂單
 app.get('/orders', async (req, res) => {
   const { data, error } = await supabase
-    .from('nudosys')  // 改成你資料表名稱
+    .from('nudosys')  
     .select('*')
     .order('time', { ascending: false });
 
