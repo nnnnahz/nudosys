@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>黑狗本人管理訂單</title>
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
     }
@@ -151,7 +150,7 @@
       background-color: #1e8449;
       box-shadow: 0 4px 12px rgba(30, 132, 73, 0.6);
     }
-    /* 已完成訂單文字 */
+    /* 已完成訂單的 */
     .done-label {
       color: #7f8c8d;
       font-weight: 600;
@@ -177,7 +176,7 @@
         </tr>
       </thead>
       <tbody id="orderTableBody">
-        <!-- 訂單資料會用 JS 插入 -->
+        <!-- 訂單資料用JS插 -->
       </tbody>
     </table>
   </div>
@@ -210,9 +209,10 @@ function loadOrders() {
         return;
       }
       orders.forEach((order) => {
-        const doneText = order.done
+        const doneButton = order.done
           ? `<span class="done-label">已完成</span>`
-          : `<button onclick="markAsDone('${order.id}')">完成</button>`;
+          : `<button class="done-btn" onclick="markAsDone('${order.id}')">完成</button>`;
+        const deleteButton = `<button class="delete-btn" onclick="deleteOrder('${order.id}')">刪除</button>`;
 
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -220,8 +220,10 @@ function loadOrders() {
           <td>${order.brand} - ${order.flavor}</td>
           <td>${new Date(order.time).toLocaleString()}</td>
           <td>
-            ${doneText}
-            <button style="margin-left:10px; background:#e74c3c; color:#fff; border:none; padding:4px 10px; border-radius:6px; cursor:pointer;" onclick="deleteOrder('${order.id}')">刪除</button>
+            <div class="btn-group">
+              ${doneButton}
+              ${deleteButton}
+            </div>
           </td>
         `;
         tableBody.appendChild(row);
@@ -229,6 +231,7 @@ function loadOrders() {
     })
     .catch(() => alert("無法取得訂單資料"));
 }
+
 
 function markAsDone(id) {
   fetch(`https://nudosys.onrender.com/done/${id}`, {
