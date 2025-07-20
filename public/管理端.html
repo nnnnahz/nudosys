@@ -48,7 +48,7 @@
     }
 
     function loadOrders() {
-  fetch('https://nudosys.onrender.com/orders')
+    fetch('https://nudosys.onrender.com/orders')
     .then(res => res.json())
     .then(orders => {
       const tableBody = document.querySelector('#orderTable tbody');
@@ -56,10 +56,10 @@
       orders.forEach(order => {
         const row = document.createElement('tr');
         row.innerHTML = `
-  <td>${order.name}</td>
-  <td>${order.brand} - ${order.flavor}</td>
-  <td>${new Date(order.time).toLocaleString()}</td>
-`;
+    <td>${order.name}</td>
+    <td>${order.brand} - ${order.flavor}</td>
+    <td>${new Date(order.time).toLocaleString()}</td>
+        `;
 
         tableBody.appendChild(row);
       });
