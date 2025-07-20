@@ -62,7 +62,9 @@ app.patch('/done/:id', async (req, res) => {
     .eq('id', id);
 
   if (error) {
-    return res.status(500).json({ error: error.message });
+    console.error('Supabase update error:', error);
+    return res.status(500).json({ message: '更新失敗' });
   }
-  res.json({ message: '已完成訂單' });
+
+  res.json({ message: '訂單標示為完成' });
 });
