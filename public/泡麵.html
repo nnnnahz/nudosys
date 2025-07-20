@@ -260,6 +260,7 @@
               <th>口味</th>
               <th>時間</th>
               <th>狀態</th>
+              <th>刪除</th>
             </tr>
           </thead>
           <tbody id="historyOrdersBody"></tbody>
@@ -423,7 +424,7 @@
           ${order.done ? '已完成' : '未完成'}
           </td>
           <td>
-          <button onclick="deleteOrder(${order.id})" style="padding:4px 8px; font-size:0.9rem; background-color:#e74c3c; color:#fff; border:none; border-radius:6px; cursor:pointer;">
+          <button onclick="deleteOrder('${order.id}')" style="padding:4px 8px; font-size:0.9rem; background-color:#e74c3c; color:#fff; border:none; border-radius:6px; cursor:pointer;">
           刪除
           </button>
           </td>
