@@ -110,6 +110,24 @@
     <div id="status"></div>
   </div>
 
+    <button onclick="loadUserOrders()">查看歷史訂單</button>
+
+    <div id="historyOrders" style="margin-top:20px; display:none;">
+      <h3>你的歷史訂單</h3>
+      <table border="1" cellpadding="5" cellspacing="0" style="width:100%; max-width:600px;">
+        <thead>
+          <tr>
+            <th>品牌</th>
+            <th>口味</th>
+            <th>時間</th>
+            <th>狀態</th>
+          </tr>
+        </thead>
+        <tbody id="historyOrdersBody">
+    </tbody>
+  </table>
+</div>
+  
   <script>
     const users = {
       "詹越至": "0210",
