@@ -29,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- 訂單顯示在這裡 -->
+        <!-- 訂單顯示在這裡 --><button onclick="markAsDone('ORDER_ID')">完成</button>
       </tbody>
     </table>
   </div>
@@ -66,6 +66,17 @@
     })
     .catch(() => alert('無法取得訂單資料'));
 }
+    function markAsDone(id) {
+  fetch(`/done/${id}`, {
+    method: 'PATCH'
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    location.reload(); // 重新整理
+  });
+}
+
   </script>
 </body>
 </html>
