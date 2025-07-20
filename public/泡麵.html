@@ -181,35 +181,37 @@
     }
 
     function submitOrder() {
-      const brand = document.getElementById("brand").value;
-      const flavor = document.getElementById("flavor").value;
+  const brand = document.getElementById("brand").value;
+  const flavor = document.getElementById("flavor").value;
 
-      if (!brand || !flavor) {
-        alert("請選擇品牌與口味！");
-        return;
-      }
+  if (!brand || !flavor) {
+    alert("請選擇品牌和口味！");
+    return;
+  }
 
-      const order = {
-        name: currentUser,
-        item: `${brand} - ${flavor}`,
-        time: new Date().toISOString()
-      };
+  const order = {
+    name: currentUser,
+    brand: brand,
+    item: flavor, // item 是口味
+    time: new Date().toISOString()
+  };
 
-      fetch('https://nudosys.onrender.com/order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(order)
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          alert('訂單送出成功！');
-        } else {
-          alert('訂單送出失敗');
-        }
-      })
-      .catch(() => alert('無法連接伺服器'));
+  fetch('https://nudosys.onrender.com/order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert('訂單送出成功！');
+    } else {
+      alert('訂單送出失敗');
     }
+  })
+  .catch(() => alert('無法連接伺服器'));
+}
+
   </script>
 </body>
 </html>
