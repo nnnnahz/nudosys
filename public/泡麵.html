@@ -232,6 +232,43 @@
   .catch(() => alert('無法連接伺服器'));
 }
 
+    function loadUserOrders() {
+  if (!currentUser) {
+    alert("請先登入");
+    return;
+  }
+
+  fetch('https://nudosys.onrender.com/orders')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById('historyOrdersBody');
+      tbody.innerHTML = ''; // 清空先前資料
+
+      // 篩選出屬於當前用戶的訂單
+      const userOrders = data.filter(order => order.name === currentUser);
+
+      if (userOrders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">沒有歷史訂單</td></tr>`;
+      } else {
+        userOrders.forEach(order => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${order.brand}</td>
+            <td>${order.flavor}</td>
+            <td>${new Date(order.time).toLocaleString()}</td>
+            <td>${order.done ? '已完成' : '未完成'}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // 歷史訂單區塊
+      document.getElementById('historyOrders').style.display = 'block';
+    })
+    .catch(() => alert('無法取得歷史訂單'));
+}
+
+
   </script>
 </body>
 </html>
