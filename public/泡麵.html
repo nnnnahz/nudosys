@@ -43,7 +43,7 @@
       background-image: url('711.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.1;
+      opacity: 0.2;
       z-index: -9;
     }
   </style>
@@ -135,7 +135,7 @@
         currentUser = name;
         document.getElementById("login").classList.add("hidden");
         document.getElementById("orderForm").classList.remove("hidden");
-        document.getElementById("status").innerText = `歡迎，${name}`;
+        document.getElementById("status").innerText = `歡迎會員，${name}`;
       } else {
         alert("密碼錯誤");
       }
