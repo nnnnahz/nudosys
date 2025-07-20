@@ -157,6 +157,44 @@
       font-weight: 600;
       font-style: italic;
     }
+
+    /* 統一完成與刪除按鈕的樣式 */
+.action-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 2px 4px;
+  vertical-align: middle;
+}
+
+/* 完成按鈕綠色樣式 */
+tbody .action-btn.done-btn {
+  background-color: #27ae60;
+  color: white;
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+tbody .action-btn.done-btn:hover {
+  background-color: #1e8449;
+  box-shadow: 0 4px 12px rgba(30, 132, 73, 0.6);
+}
+
+/* 刪除按鈕紅色樣式 */
+tbody .action-btn.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+tbody .action-btn.delete-btn:hover {
+  background-color: #c0392b;
+  box-shadow: 0 4px 12px rgba(192, 57, 43, 0.6);
+}
+
   </style>
 </head>
 <body>
@@ -214,7 +252,7 @@
         orders.forEach((order) => {
           const doneText = order.done
             ? `<span class="done-label">已完成</span>`
-            : `<button onclick="markAsDone('${order.id}')">完成</button>`;
+            : `<button class="action-btn done-btn" onclick="markAsDone('${order.id}')">完成</button>`;
 
           const row = document.createElement("tr");
           row.innerHTML = `
@@ -223,7 +261,7 @@
             <td>${new Date(order.time).toLocaleString()}</td>
             <td>
               ${doneText}
-              <button style="margin-left:10px; background:#e74c3c; color:#fff; border:none; padding:4px 10px; border-radius:6px; cursor:pointer;" onclick="deleteOrder('${order.id}')">刪除</button>
+              <button class="action-btn delete-btn" onclick="deleteOrder('${order.id}')">刪除</button>
             </td>
           `;
           tableBody.appendChild(row);
