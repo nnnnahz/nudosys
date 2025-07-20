@@ -26,10 +26,11 @@
           <th>名字</th>
           <th>訂購內容</th>
           <th>時間</th>
+          <th>操作</th>
         </tr>
       </thead>
-      <tbody>
-        <!-- 訂單顯示在這裡 --><button onclick="markAsDone('ORDER_ID')">完成</button>
+      <tbody id="orderTableBody">
+        <!-- 訂單資料會用 JS 插入 -->
       </tbody>
     </table>
   </div>
@@ -59,6 +60,7 @@
     <td>${order.name}</td>
     <td>${order.brand} - ${order.flavor}</td>
     <td>${new Date(order.time).toLocaleString()}</td>
+    <td><button onclick="markAsDone('${order.id}')">完成</button></td>
         `;
 
         tableBody.appendChild(row);
@@ -66,17 +68,23 @@
     })
     .catch(() => alert('無法取得訂單資料'));
 }
-    function markAsDone(id) {
-  fetch(`/done/${id}`, {
+
+
+    
+function markAsDone(id) {
+  fetch(`https://nudosys.onrender.com/done/${id}`, {
     method: 'PATCH'
   })
   .then(res => res.json())
   .then(data => {
     alert(data.message);
-    location.reload(); // 重新整理
+    location.reload(); // 重新整理畫面，讓已完成訂單不再出現
   });
 }
 
+
+
+    
   </script>
 </body>
 </html>
