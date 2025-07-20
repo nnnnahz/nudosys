@@ -344,6 +344,26 @@
       });
     }
 
+
+    function deleteOrder(id) {
+    if (!confirm("你確定要刪除這筆訂單嗎？")) return;
+
+    fetch(`https://nudosys.onrender.com/order/${id}`, {
+    method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+    if (data.success) {
+      alert('刪除成功！');
+      loadUserOrders();
+    } else {
+      alert('刪除失敗');
+    }
+    })
+    .catch(() => alert('無法刪除資料'));
+    }
+
+    
     function submitOrder() {
       const brand = document.getElementById("brand").value;
       const flavor = document.getElementById("flavor").value;
@@ -392,19 +412,26 @@
 
         if (userOrders.length === 0) {
           tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">沒有歷史訂單</td></tr>`;
-        } else {
+        }
+        else {
           userOrders.forEach(order => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td>${order.brand}</td>
-              <td>${order.flavor}</td>
-              <td>${new Date(order.time).toLocaleString()}</td>
-              <td style="color:${order.done ? '#27ae60' : '#e74c3c'}; font-weight:700;">
-                ${order.done ? '已完成' : '未完成'}
-              </td>
-            `;
-            tbody.appendChild(tr);
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+          <td>${order.brand}</td>
+          <td>${order.flavor}</td>
+          <td>${new Date(order.time).toLocaleString()}</td>
+          <td style="color:${order.done ? '#27ae60' : '#e74c3c'}; font-weight:700;">
+          ${order.done ? '已完成' : '未完成'}
+          </td>
+          <td>
+          <button onclick="deleteOrder(${order.id})" style="padding:4px 8px; font-size:0.9rem; background-color:#e74c3c; color:#fff; border:none; border-radius:6px; cursor:pointer;">
+          刪除
+          </button>
+          </td>
+          `;
+          tbody.appendChild(tr);
           });
+
         }
 
         document.getElementById('historyOrders').style.display = 'block';
