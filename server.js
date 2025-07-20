@@ -68,3 +68,39 @@ app.patch('/done/:id', async (req, res) => {
 
   res.json({ message: '訂單標示為完成' });
 });
+
+
+function loadUserOrders() {
+  if (!currentUser) {
+    alert("請先登入");
+    return;
+  }
+
+  fetch('https://nudosys.onrender.com/orders')
+    .then(res => res.json())
+    .then(orders => {
+      const tbody = document.getElementById('historyOrdersBody');
+      tbody.innerHTML = '';
+
+      // 篩選該用戶的訂單
+      const userOrders = orders.filter(order => order.name === currentUser);
+
+      if (userOrders.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4">你目前沒有訂單</td></tr>';
+      } else {
+        userOrders.forEach(order => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${order.brand}</td>
+            <td>${order.flavor}</td>
+            <td>${new Date(order.time).toLocaleString()}</td>
+            <td>${order.done ? '已完成' : '未完成'}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.getElementById('historyOrders').style.display = 'block';
+    })
+    .catch(() => alert('無法取得歷史訂單'));
+}
