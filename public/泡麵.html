@@ -2,59 +2,179 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>黑狗宅急便</title>
   <style>
-    body {
-      font-family: sans-serif;
-      background: #f4f4f4;
-      padding: 2rem;
-    }
-    .card {
-      max-width: 400px;
-      margin: auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    label, select, input {
-      display: block;
-      width: 100%;
-      margin: 1rem 0 0.5rem;
-    }
-    button {
-      width: 100%;
-      padding: 0.8rem;
-      background: #3498db;
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-    }
-    .hidden { display: none; }
+    /* 背景圖層，fixed定位避免捲動時移動 */
     body::before {
       content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
+      position: fixed;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       background-image: url('711.jpg');
       background-size: cover;
-      background-position: center;
-      opacity: 0.2;
-      z-index: -9;
-    }
-    .submit-btn {
-    margin-top: 1rem; 
-    }
-    button:hover {
-    background-color: #2980b9;
-    color: white;
-    cursor: pointer;
+      background-position: center center;
+      opacity: 0.15;
+      z-index: -1;
+      filter: brightness(0.8);
     }
 
+    /* 字體與版面重設 */
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+      background-color: #f4f6f8;
+      color: #2c3e50;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: #fff;
+      padding: 2.5rem 2.5rem 3rem;
+      border-radius: 1.2rem;
+      box-shadow: 0 16px 32px rgb(44 62 80 / 0.12);
+      max-width: 400px;
+      width: 100%;
+      transition: box-shadow 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 24px 48px rgb(44 62 80 / 0.2);
+    }
+
+    h2 {
+      margin: 0 0 1.8rem 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      color: #34495e;
+      text-align: center;
+      user-select: none;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-top: 1.3rem;
+      display: block;
+      user-select: none;
+      color: #34495e;
+    }
+
+    select, input[type="password"] {
+      width: 100%;
+      padding: 0.55rem 1rem;
+      margin-top: 0.4rem;
+      border: 1.6px solid #bdc3c7;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      font-weight: 500;
+      color: #34495e;
+      user-select: text;
+    }
+    select:focus, input[type="password"]:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 6px rgba(52, 152, 219, 0.35);
+    }
+
+    button {
+      margin-top: 1.6rem;
+      width: 100%;
+      background-color: #3498db;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 0.7rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgb(52 152 219 / 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    button:hover {
+      background-color: #2980b9;
+      box-shadow: 0 7px 22px rgb(41 128 185 / 0.6);
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .submit-btn {
+      margin-top: 1rem;
+      background-color: #2ecc71;
+      box-shadow: 0 5px 15px rgb(46 204 113 / 0.4);
+    }
+    .submit-btn:hover {
+      background-color: #27ae60;
+      box-shadow: 0 7px 22px rgb(39 174 96 / 0.6);
+    }
+
+    /* 歷史訂單表格 */
+    #historyOrders {
+      margin-top: 2rem;
+      max-width: 600px;
+      overflow-x: auto;
+      border-radius: 1rem;
+      box-shadow: 0 12px 28px rgb(0 0 0 / 0.1);
+      background-color: #fff;
+      padding: 1.2rem 1rem;
+      display: none;
+      user-select: none;
+    }
+    #historyOrders h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #34495e;
+      text-align: center;
+    }
+    #historyOrders table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 12px;
+      font-size: 1rem;
+      color: #34495e;
+      user-select: text;
+    }
+    #historyOrders thead tr {
+      background-color: #3498db;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      border-radius: 0.6rem;
+    }
+    #historyOrders thead th {
+      padding: 12px 15px;
+      text-align: left;
+    }
+    #historyOrders tbody tr {
+      background: #ecf0f1;
+      border-radius: 0.8rem;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.07);
+      transition: background-color 0.2s ease;
+    }
+    #historyOrders tbody tr:hover {
+      background-color: #d6e9ff;
+    }
+    #historyOrders tbody td {
+      padding: 12px 15px;
+      vertical-align: middle;
+    }
+    #historyOrders tbody td:nth-child(4) {
+      font-weight: 600;
+      color: #27ae60;
+    }
+    #historyOrders tbody td:nth-child(4):not(:contains("已完成")) {
+      color: #e74c3c;
+    }
   </style>
 </head>
 <body>
@@ -63,7 +183,7 @@
 
     <div id="login">
       <label for="name">你是誰?：</label>
-      <select id="name">
+      <select id="name" aria-label="會員名稱">
         <option value="詹越至">詹越至</option>
         <option value="吳柏樺">吳柏樺</option>
         <option value="周容">周容</option>
@@ -80,14 +200,14 @@
       </select>
 
       <label for="password">密碼：</label>
-      <input type="password" id="password" />
+      <input type="password" id="password" aria-label="密碼" autocomplete="current-password" />
 
       <button onclick="login()">登入</button>
     </div>
 
-    <div id="orderForm" class="hidden">
+    <div id="orderForm" class="hidden" aria-live="polite" aria-atomic="true">
       <label for="brand">選擇品牌：</label>
-      <select id="brand" onchange="updateFlavors()">
+      <select id="brand" onchange="updateFlavors()" aria-label="選擇品牌">
         <option value="">請選擇</option>
         <option value="合味道">合味道</option>
         <option value="來一客">來一客</option>
@@ -109,36 +229,33 @@
       </select>
 
       <label for="flavor">選擇口味：</label>
-      <select id="flavor">
+      <select id="flavor" aria-label="選擇口味">
         <option value="">請先選擇品牌</option>
       </select>
 
       <button onclick="submitOrder()">送出訂單</button>
-
       <button onclick="loadUserOrders()" class="submit-btn">查看歷史訂單</button>
 
-    <div id="historyOrders" style="margin-top:20px; display:none;">
-      <h3>你的歷史訂單</h3>
-      <table border="1" cellpadding="5" cellspacing="0" style="width:100%; max-width:600px;">
-        <thead>
-          <tr>
-            <th>品牌</th>
-            <th>口味</th>
-            <th>時間</th>
-            <th>狀態</th>
-          </tr>
-        </thead>
-        <tbody id="historyOrdersBody">
-    </tbody>
-  </table>
-</div>
+      <div id="historyOrders" aria-live="polite" aria-atomic="true">
+        <h3>你的歷史訂單</h3>
+        <table border="0" cellpadding="5" cellspacing="0" style="width:100%; max-width:600px;">
+          <thead>
+            <tr>
+              <th>品牌</th>
+              <th>口味</th>
+              <th>時間</th>
+              <th>狀態</th>
+            </tr>
+          </thead>
+          <tbody id="historyOrdersBody">
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div id="status"></div>
+    <div id="status" aria-live="polite" style="margin-top:1rem; text-align:center;"></div>
   </div>
 
-    
-  
   <script>
     const users = {
       "詹越至": "0210",
@@ -193,7 +310,6 @@
     function updateFlavors() {
       const brand = document.getElementById("brand").value;
       const flavorSelect = document.getElementById("flavor");
-
       flavorSelect.innerHTML = "";
 
       if (!brandFlavorMap[brand]) {
@@ -210,74 +326,72 @@
     }
 
     function submitOrder() {
-  const brand = document.getElementById("brand").value;
-  const flavor = document.getElementById("flavor").value;
+      const brand = document.getElementById("brand").value;
+      const flavor = document.getElementById("flavor").value;
 
-  if (!brand || !flavor) {
-    alert("請選擇品牌和口味！");
-    return;
-  }
-
-  const order = {
-    name: currentUser,
-    brand: brand,
-    flavor: flavor, // item 是口味
-    time: new Date().toISOString()
-  };
-
-  fetch('https://nudosys.onrender.com/order', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(order)
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert('訂單送出成功！');
-    } else {
-      alert('訂單送出失敗');
-    }
-  })
-  .catch(() => alert('無法連接伺服器'));
-}
-
-    function loadUserOrders() {
-  if (!currentUser) {
-    alert("請先登入");
-    return;
-  }
-
-  fetch('https://nudosys.onrender.com/orders')
-    .then(res => res.json())
-    .then(data => {
-      const tbody = document.getElementById('historyOrdersBody');
-      tbody.innerHTML = ''; // 清空先前資料
-
-      // 篩選出屬於當前用戶的訂單
-      const userOrders = data.filter(order => order.name === currentUser);
-
-      if (userOrders.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">沒有歷史訂單</td></tr>`;
-      } else {
-        userOrders.forEach(order => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${order.brand}</td>
-            <td>${order.flavor}</td>
-            <td>${new Date(order.time).toLocaleString()}</td>
-            <td>${order.done ? '已完成' : '未完成'}</td>
-          `;
-          tbody.appendChild(tr);
-        });
+      if (!brand || !flavor) {
+        alert("請選擇品牌和口味！");
+        return;
       }
 
-      // 歷史訂單區塊
-      document.getElementById('historyOrders').style.display = 'block';
-    })
-    .catch(() => alert('無法取得歷史訂單'));
-}
+      const order = {
+        name: currentUser,
+        brand,
+        flavor,
+        time: new Date().toISOString()
+      };
 
+      fetch('https://nudosys.onrender.com/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(order)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          alert('訂單送出成功！');
+        } else {
+          alert('訂單送出失敗');
+        }
+      })
+      .catch(() => alert('無法連接伺服器'));
+    }
 
+    function loadUserOrders() {
+      if (!currentUser) {
+        alert("請先登入");
+        return;
+      }
+
+      fetch('https://nudosys.onrender.com/orders')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('historyOrdersBody');
+        tbody.innerHTML = '';
+
+        const userOrders = data.filter(order => order.name === currentUser);
+
+        if (userOrders.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">沒有歷史訂單</td></tr>`;
+        } else {
+          userOrders.forEach(order => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${order.brand}</td>
+              <td>${order.flavor}</td>
+              <td>${new Date(order.time).toLocaleString()}</td>
+              <td style="color:${order.done ? '#27ae60' : '#e74c3c'}; font-weight:700;">
+                ${order.done ? '已完成' : '未完成'}
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+
+        document.getElementById('historyOrders').style.display = 'block';
+      })
+      .catch(() => alert('無法取得歷史訂單'));
+    }
   </script>
 </body>
 </html>
