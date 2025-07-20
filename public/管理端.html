@@ -48,21 +48,21 @@
       }
     }
 
-    function loadOrders() {
-    fetch('https://nudosys.onrender.com/orders')
+   function loadOrders() {
+  fetch('https://nudosys.onrender.com/orders')
     .then(res => res.json())
     .then(orders => {
       const tableBody = document.querySelector('#orderTable tbody');
       tableBody.innerHTML = '';
       orders.forEach(order => {
+        const doneText = order.done ? '✅ 已完成' : `<button onclick="markAsDone('${order.id}')">完成</button>`;
         const row = document.createElement('tr');
         row.innerHTML = `
-    <td>${order.name}</td>
-    <td>${order.brand} - ${order.flavor}</td>
-    <td>${new Date(order.time).toLocaleString()}</td>
-    <td><button onclick="markAsDone('${order.id}')">完成</button></td>
+          <td>${order.name}</td>
+          <td>${order.brand} - ${order.flavor}</td>
+          <td>${new Date(order.time).toLocaleString()}</td>
+          <td>${doneText}</td>
         `;
-
         tableBody.appendChild(row);
       });
     })
@@ -78,8 +78,9 @@ function markAsDone(id) {
   .then(res => res.json())
   .then(data => {
     alert(data.message);
-    location.reload(); // 重新整理畫面，讓已完成訂單不再出現
-  });
+    loadOrders();  // 重新載入
+  })
+  .catch(() => alert('無法連接伺服器'));
 }
 
 
