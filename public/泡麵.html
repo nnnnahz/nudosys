@@ -10,7 +10,6 @@
       background: #f4f4f4;
       padding: 2rem;
     }
-    
     .card {
       max-width: 400px;
       margin: auto;
@@ -34,7 +33,6 @@
       font-size: 1rem;
     }
     .hidden { display: none; }
-    
     body::before {
       content: "";
       position: absolute;
@@ -45,8 +43,8 @@
       background-image: url('711.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.1; /* 透明度 */
-      z-index: -1;  /* 底層 */
+      opacity: 0.1;
+      z-index: -1;
     }
   </style>
 </head>
@@ -79,12 +77,33 @@
     </div>
 
     <div id="orderForm" class="hidden">
-      <label for="noodle">想要吃甚麼?：</label>
-      <select id="noodle">
-        <option>維力炸醬麵</option>
-        <option>合味道</option>
-        <option>花雕雞</option>
+      <label for="brand">選擇品牌：</label>
+      <select id="brand" onchange="updateFlavors()">
+        <option value="">請選擇</option>
+        <option value="合味道">合味道</option>
+        <option value="來一客">來一客</option>
+        <option value="農心">農心</option>
+        <option value="滿漢大餐">滿漢大餐</option>
+        <option value="素飄香">素飄香</option>
+        <option value="台酒">台酒</option>
+        <option value="味味一品">味味一品</option>
+        <option value="阿Q">阿Q</option>
+        <option value="味味a">味味a</option>
+        <option value="維力">維力</option>
+        <option value="統一">統一</option>
+        <option value="大乾麵">大乾麵</option>
+        <option value="手打麵">手打麵</option>
+        <option value="一度讚">一度讚</option>
+        <option value="炒泡麵">炒泡麵</option>
+        <option value="plus">plus</option>
+        <option value="營多">營多</option>
       </select>
+
+      <label for="flavor">選擇口味：</label>
+      <select id="flavor">
+        <option value="">請先選擇品牌</option>
+      </select>
+
       <button onclick="submitOrder()">送出訂單</button>
     </div>
 
@@ -122,11 +141,57 @@
       }
     }
 
+    const brandFlavorMap = {
+      "合味道": ["海鮮", "辣味", "辣味海鮮"],
+      "來一客": ["海鮮", "牛肉", "泡菜", "鮮蝦魚板", "牛肉蔬菜", "辣味素食", "京燉肉骨"],
+      "農心": ["辛拉麵"],
+      "滿漢大餐": ["珍味牛肉麵", "蔥燒牛肉麵", "麻辣牛肉麵", "金牛肉麵", "熗牛肉麵", "蔥燒豬肉麵"],
+      "素飄香": ["麻辣燙", "原味"],
+      "台酒": ["花雕酸菜牛肉麵", "麻油雞麵", "花雕雞麵"],
+      "味味一品": ["紅燒牛肉麵", "原汁珍味爌肉麵", "川味牛肉麵", "珍味牛肉麵", "麻辣臭豆腐麵", "牛筋麵"],
+      "阿Q": ["紅椒牛肉", "生猛海鮮", "蒜香珍肉", "雞汁排骨", "韓式泡菜"],
+      "味味a": ["排骨雞湯麵（袋）", "排骨雞乾麵 (袋)", "排骨雞麵（小碗）", "冬菜鴨肉粉絲"],
+      "維力": ["炸醬麵(袋）", "炸醬麵（小碗）", "炸醬麵 （大碗）", "辣炸醬麵（大碗）"],
+      "統一": ["肉燥麵", "肉燥米粉", "肉骨茶麵", "鮮蝦麵"],
+      "大乾麵": ["蔥燒牛肉", "地獄辣椒", "紅油擔擔"],
+      "手打麵": ["蔥燒牛肉麵", "和風豚骨麵"],
+      "一度讚": ["紅燒牛肉麵", "爌肉麵", "老甕牛肉麵"],
+      "炒泡麵": ["香辣炸醬", "爆香三杯"],
+      "plus": ["黑蒜豚骨湯麵", "紅燒牛肉湯麵"],
+      "營多": ["炒泡麵"]
+    };
+
+    function updateFlavors() {
+      const brand = document.getElementById("brand").value;
+      const flavorSelect = document.getElementById("flavor");
+
+      flavorSelect.innerHTML = "";
+
+      if (!brandFlavorMap[brand]) {
+        flavorSelect.innerHTML = '<option value="">請先選擇品牌</option>';
+        return;
+      }
+
+      brandFlavorMap[brand].forEach(flavor => {
+        const opt = document.createElement("option");
+        opt.value = flavor;
+        opt.textContent = flavor;
+        flavorSelect.appendChild(opt);
+      });
+    }
+
     function submitOrder() {
-      const item = document.getElementById("noodle").value;
+      const brand = document.getElementById("brand").value;
+      const flavor = document.getElementById("flavor").value;
+
+      if (!brand || !flavor) {
+        alert("請選擇品牌與口味！");
+        return;
+      }
+
       const order = {
         name: currentUser,
-        item: item,
+        item: `${brand} - ${flavor}`,
         time: new Date().toISOString()
       };
 
