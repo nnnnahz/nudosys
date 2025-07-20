@@ -411,7 +411,7 @@
         const userOrders = data.filter(order => order.name === currentUser);
 
         if (userOrders.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">沒有歷史訂單</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">沒有歷史訂單</td></tr>`;
         }
         else {
           userOrders.forEach(order => {
