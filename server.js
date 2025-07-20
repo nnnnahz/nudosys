@@ -11,16 +11,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// Supabase 初始化（填入你的 Supabase 網址和密鑰）
+// Supabase 初始化
 const supabaseUrl = 'https://puldiaqtuypozwrqatex.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1bGRpYXF0dXlwb3p3cnFhdGV4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MjkxMTE0NSwiZXhwIjoyMDY4NDg3MTQ1fQ.tsItweZI0Hj5k4F-k75aFuIQ9ccUQEXcVw6F95O6oJM';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// POST /order - 新增訂單
+// /order  新增訂單
 app.post('/order', async (req, res) => {
-  const { name, flovor, time, brand } = req.body;
+  const { name, flavor, time, brand } = req.body;
   const { data, error } = await supabase
-    .from('nudosys')   // 改成你資料表名稱
+    .from('nudosys')   
     .insert([{ name, flavor, time, brand }]);
 
   if (error) {
