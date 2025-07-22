@@ -79,7 +79,7 @@
       box-shadow: 0 6px 12px rgba(41, 128, 185, 0.6);
     }
     #adminPanel {
-      max-width: 900px;
+      max-width: 1500px;
       width: 100%;
       margin-top: 2.5rem;
       background: white;
@@ -151,14 +151,14 @@
       background-color: #1e8449;
       box-shadow: 0 4px 12px rgba(30, 132, 73, 0.6);
     }
-    /* 已完成訂單文字 */
+    /* 已完成的訂單 */
     .done-label {
       color: #7f8c8d;
       font-weight: 600;
       font-style: italic;
     }
 
-    /* 統一完成與刪除按鈕的樣式 */
+    /* 統一按鈕樣式 */
 .action-btn {
   padding: 0.4rem 1rem;
   font-size: 0.9rem;
@@ -171,7 +171,7 @@
   vertical-align: middle;
 }
 
-/* 完成按鈕綠色樣式 */
+/* 完成按鈕綠色 */
 tbody .action-btn.done-btn {
   background-color: #27ae60;
   color: white;
@@ -183,7 +183,7 @@ tbody .action-btn.done-btn:hover {
   box-shadow: 0 4px 12px rgba(30, 132, 73, 0.6);
 }
 
-/* 刪除按鈕紅色樣式 */
+/* 刪除按鈕紅色 */
 tbody .action-btn.delete-btn {
   background-color: #e74c3c;
   color: white;
@@ -211,6 +211,8 @@ tbody .action-btn.delete-btn:hover {
           <th>名字</th>
           <th>訂購內容</th>
           <th>時間</th>
+          <th>數量</th>
+          <th>總價</th>
           <th>操作</th>
         </tr>
       </thead>
@@ -243,7 +245,7 @@ tbody .action-btn.delete-btn:hover {
         if (orders.length === 0) {
           tableBody.innerHTML = `
             <tr>
-              <td colspan="4" style="text-align:center; color:#777;">目前沒有訂單</td>
+              <td colspan="6" style="text-align:center; color:#777;">目前沒有訂單</td>
             </tr>
           `;
           return;
