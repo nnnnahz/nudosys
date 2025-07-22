@@ -261,10 +261,13 @@ tbody .action-btn.delete-btn:hover {
             <td>${order.name}</td>
             <td>${order.brand} - ${order.flavor}</td>
             <td>${new Date(order.time).toLocaleString()}</td>
+            <td>${order.quantity}</td>
+            <td>${order.tprice}</td>
             <td>
               ${doneText}
               <button class="action-btn delete-btn" onclick="deleteOrder('${order.id}')">刪除</button>
             </td>
+            
           `;
           tableBody.appendChild(row);
         });
