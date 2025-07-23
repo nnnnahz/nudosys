@@ -394,6 +394,12 @@
     .catch(() => alert('無法刪除資料'));
     }
 
+
+    function extractPriceFromFlavor(flavor) {
+    const match = flavor.match(/(\d+)$/); // 從 flavor 結尾抓價格數字
+    return match ? parseInt(match[1], 10) : 0;
+    }
+
     
     function submitOrder() {
       const brand = document.getElementById("brand").value;
@@ -406,10 +412,14 @@
         return;
       }
 
+      const unitPrice = extractPriceFromFlavor(flavor);
+      const tprice = unitPrice * quantity;
+
       const order = {
         name: currentUser,
         brand,
         quantity,
+        tprice,
         flavor,
         time: new Date().toISOString()
         
