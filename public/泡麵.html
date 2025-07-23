@@ -452,6 +452,7 @@
           tr.innerHTML = `
           <td>${order.brand}</td>
           <td>${order.flavor}</td>
+          <td>${order.quantity}</td>
           <td>${new Date(order.time).toLocaleString()}</td>
           <td style="color:${order.done ? '#27ae60' : '#e74c3c'}; font-weight:700;">
           ${order.done ? '已完成' : '未完成'}
