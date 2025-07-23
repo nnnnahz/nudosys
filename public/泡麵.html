@@ -397,7 +397,7 @@
     function submitOrder() {
       const brand = document.getElementById("brand").value;
       const flavor = document.getElementById("flavor").value;
-      const quantity =document.getElementById("quantity").value;
+      const quantity = parseInt(document.getElementById("quantity").value, 10);
 
       if (!brand || !flavor) {
         alert("請選擇品牌和口味！");
