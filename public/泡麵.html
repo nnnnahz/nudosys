@@ -252,6 +252,10 @@
       <select id="flavor" aria-label="選擇口味">
         <option value="">請先選擇品牌</option>
       </select>
+      
+      <label for="quantity">數量：</label>
+      <input type="number" id="quantity" class="input-field" min="1" value="1" />
+      <br><br>
 
       <button onclick="submitOrder()">送出訂單</button>
       <button onclick="loadUserOrders()" class="submit-btn">查看歷史訂單</button>
@@ -393,6 +397,7 @@
     function submitOrder() {
       const brand = document.getElementById("brand").value;
       const flavor = document.getElementById("flavor").value;
+      const quantity =document.getElementById("quantity").value;
 
       if (!brand || !flavor) {
         alert("請選擇品牌和口味！");
@@ -402,8 +407,10 @@
       const order = {
         name: currentUser,
         brand,
+        quantity,
         flavor,
         time: new Date().toISOString()
+        
       };
 
       fetch('https://nudosys.onrender.com/order', {
