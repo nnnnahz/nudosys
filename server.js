@@ -18,10 +18,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // /order  新增訂單
 app.post('/order', async (req, res) => {
-  const { name, flavor, time, brand, quantity } = req.body;
+  const { name, flavor, time, brand, quantity, tprice } = req.body;
   const { data, error } = await supabase
     .from('nudosys')   
-    .insert([{ name, flavor, time, brand, quantity }]);
+    .insert([{ name, flavor, time, brand, quantity,tprice }]);
 
   if (error) {
     console.error('Supabase insert error:', error);
