@@ -406,8 +406,7 @@
       const flavor = document.getElementById("flavor").value;
       const quantity = parseInt(document.getElementById("quantity").value, 10);
       console.log("quantity 是：", quantity, typeof quantity);
-      console.log("tprice是",tprice,typeof tprice);
-
+      
       if (!brand || !flavor) {
         alert("請選擇品牌和口味！");
         return;
@@ -415,6 +414,8 @@
 
       const unitPrice = extractPriceFromFlavor(flavor);
       const tprice = unitPrice * quantity;
+      console.log("tprice是",tprice,typeof tprice);
+
 
       const order = {
         name: currentUser,
