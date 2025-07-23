@@ -398,6 +398,7 @@
       const brand = document.getElementById("brand").value;
       const flavor = document.getElementById("flavor").value;
       const quantity = parseInt(document.getElementById("quantity").value, 10);
+      console.log("quantity 是：", quantity, typeof quantity);
 
       if (!brand || !flavor) {
         alert("請選擇品牌和口味！");
