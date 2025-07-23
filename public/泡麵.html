@@ -262,7 +262,7 @@
 
       <div id="historyOrders" aria-live="polite" aria-atomic="true">
         <h3>你的歷史訂單</h3>
-        <table border="0" cellpadding="5" cellspacing="0" style="width:100%; max-width:600px;">
+        <table border="0" cellpadding="5" cellspacing="0" style="width:100%; max-width:800px;">
           <thead>
             <tr>
               <th>品牌</th>
@@ -458,7 +458,7 @@
         const userOrders = data.filter(order => order.name === currentUser);
 
         if (userOrders.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">沒有歷史訂單</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">沒有歷史訂單</td></tr>`;
         }
         else {
           userOrders.forEach(order => {
