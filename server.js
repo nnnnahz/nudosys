@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 // Supabase 初始化
-const supabaseUrl = 'https://puldiaqtuypozwrqatex.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1bGRpYXF0dXlwb3p3cnFhdGV4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MjkxMTE0NSwiZXhwIjoyMDY4NDg3MTQ1fQ.tsItweZI0Hj5k4F-k75aFuIQ9ccUQEXcVw6F95O6oJM';
+const supabaseUrl = 'https://fyazrpzfiybiqyqzzidm.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5YXpycHpmaXliaXF5cXp6aWRtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDY2ODQwNywiZXhwIjoyMDkwMjQ0NDA3fQ.NQM-Mf-ltSJM_sewhV52Dfw43MjUz3XRzIVqHsPS0QY';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // /order  新增訂單
