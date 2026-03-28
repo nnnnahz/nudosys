@@ -205,6 +205,7 @@
       <select id="name" class="input-field" aria-label="會員名稱">
         <option value="Josie">Josie至尊會員</option>
         <option value="詹越至">詹越至</option>
+        <option value="陳育靜">陳育靜</option>
         <option value="吳柏樺">吳柏樺</option>
         <option value="周容">周容</option>
         <option value="李寬灝">李寬灝</option>
@@ -293,6 +294,7 @@
     const users = {
       "Josie": "321",
       "詹越至": "0210",
+      "陳育靜": "0007",
       "吳柏樺": "uber",
       "周容": "0402",
       "李寬灝": "0123",
@@ -322,7 +324,7 @@
         currentUser = name;
         document.getElementById("login").style.display = "none";
         document.getElementById("orderForm").style.display = "block";
-        document.getElementById("status").innerText = `歡迎會員，${name}`;
+        document.getElementById("status").innerText = `Yoooo!，${name}`;
       } else {
         alert("密碼錯誤");
       }
