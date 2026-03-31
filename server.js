@@ -30,7 +30,7 @@ app.post('/order', async (req, res) => {
   res.json({ success: true });
 });
 
-//  /orders - 取得所有訂單
+//  /orders - 取得訂單
 app.get('/orders', async (req, res) => {
   const { data, error } = await supabase
     .from('nudosys')  
@@ -82,7 +82,7 @@ function loadUserOrders() {
       const tbody = document.getElementById('historyOrdersBody');
       tbody.innerHTML = '';
 
-      // 篩選該用戶的訂單
+      // 篩選訂單
       const userOrders = orders.filter(order => order.name === currentUser);
 
       if (userOrders.length === 0) {
@@ -108,7 +108,7 @@ function loadUserOrders() {
 
 app.delete('/order/:id', async (req, res) => {
   const { id } = req.params;
-  console.log("收到刪除請求，ID =", id);
+  console.log("收到，ID =", id);
 
   const { error } = await supabase
     .from('nudosys')
